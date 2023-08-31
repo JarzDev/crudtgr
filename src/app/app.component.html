@@ -10,18 +10,21 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          <li class="nav-item">
-            <a *ngIf="!activo" class="nav-link" href="/sing-up">Registrate</a>
+          <li *ngIf="!activo" class="nav-item">
+            <a  class="nav-link" href="/sing-up">Registrate</a>
           </li>
-          <li class="nav-item">
-            <a *ngIf="!activo" class="nav-link" href="/sing-in">Inicia Sesion</a>
+          <li *ngIf="!activo" class="nav-item">
+            <a  class="nav-link" href="/sing-in">Inicia Sesion</a>
           </li>
+          <div *ngIf="activo">
           <li class="nav-item">
-            <a  *ngIf="" class="nav-link" href="/show" tabindex="-1" aria-disabled="true">show</a>
+            <a  class="nav-link" href="/show" tabindex="-1" aria-disabled="true">show</a>
           </li>
-          
+        </div>
         </ul>
-           <span *ngIf="email != '' ">{{email}}</span>     <button   type="button"  (click)="logOut()" class="end btn btn-outline-dark"  >   LogOut</button>
+        <div *ngIf="activo">
+           <span ></span>     <button   type="button"  (click)="logOut()" class="end btn btn-outline-dark"  >   LogOut</button>
+          </div>
       </div>
     </div>
   </nav>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { CognitoService } from './services/cognito.service';
+import { UtilsService } from './services/utils.service';
 
 @Component({
   selector: 'app-root',
@@ -14,15 +15,23 @@ import { CognitoService } from './services/cognito.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'crudtgr';
   activo = false;
   email = localStorage.getItem('email');
 
-  constructor(private router: Router, private cognitoSrv: CognitoService) { 
+  constructor(private router: Router, private cognitoSrv: CognitoService, private utilsSrv: UtilsService) { 
     
-    this.email = localStorage.getItem('email');
+  }
 
+  ngOnInit(): void {
+   
+    
+
+    this.email = localStorage.getItem('email');
+    if(this.email != null){
+      this.activo = true;
+    }
   }
 
   logOut() {

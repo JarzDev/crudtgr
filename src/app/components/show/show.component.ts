@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { IUser } from 'src/app/interfaces/iuser';
 import { CognitoService } from 'src/app/services/cognito.service';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-show',
@@ -25,6 +26,8 @@ export class ShowComponent {
         console.log(this.cognitoData.attributes.email);
 
         localStorage.setItem('email', this.cognitoData.attributes.email);
+
+        Swal.fire("Bienvenido", this.cognitoData.attributes.email, "success")
       })
      
       
