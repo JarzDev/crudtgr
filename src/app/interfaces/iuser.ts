@@ -3,7 +3,7 @@ export interface IUser {
     password: string;
     showPassword: boolean;
     code: string;
-    name: string;
+    
     givenName: string;
     familyName: string;
   }

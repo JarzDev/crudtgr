@@ -77,4 +77,13 @@ export class CognitoService {
     });
   }
 
+  public forgotPassword(user: IUser): Promise<any> {
+    return Auth.forgotPassword(user.email);
+  }
+
+  public forgotPasswordSubmit(user: IUser): Promise<any> {
+    return Auth.forgotPasswordSubmit(user.email, user.code, user.password);
+  }
+  
+
 }
