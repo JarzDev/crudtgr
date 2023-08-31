@@ -11,15 +11,17 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/sing-up">Registrate</a>
+            <a *ngIf="!activo" class="nav-link" href="/sing-up">Registrate</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/sing-in">Inicia Sesion</a>
+            <a *ngIf="!activo" class="nav-link" href="/sing-in">Inicia Sesion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            <a  *ngIf="" class="nav-link" href="/show" tabindex="-1" aria-disabled="true">show</a>
           </li>
+          
         </ul>
+           <span *ngIf="email != '' ">{{email}}</span>     <button   type="button"  (click)="logOut()" class="end btn btn-outline-dark"  >   LogOut</button>
       </div>
     </div>
   </nav>

@@ -30,8 +30,9 @@ this.user = {} as IUser;
 public signIn(): void {
   this.loading = true;
   this.cognitoService.signIn(this.user)
-  .then(() => {
+  .then(() => { 
     this.router.navigate(['/show']);
+    
   }).catch(() => {
     this.loading = false;
   });

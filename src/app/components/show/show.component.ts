@@ -11,15 +11,26 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule],
   templateUrl: './show.component.html',
   styleUrls: ['./show.component.scss']
+
+  
 })
 export class ShowComponent {
 
+  cognitoData : any ;
   constructor(private cognitoService: CognitoService) {
   
-    this.cognitoService.getUser();
-   
-    
 
+      this.cognitoData  = this.cognitoService.getUser().then((data) => {
+        this.cognitoData = data;
+        console.log(this.cognitoData.attributes.email);
+
+        localStorage.setItem('email', this.cognitoData.attributes.email);
+      })
+     
+      
+
+      ;
   }
+  
 
 }
