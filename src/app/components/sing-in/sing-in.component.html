@@ -3,22 +3,48 @@
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>Bienvenido</mat-card-title>
-          <mat-card-subtitle>Registrate</mat-card-subtitle>
+          <mat-card-subtitle>Inicia Sesion</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image src="https://www.tgr.cl/wp-content/uploads/2020/02/tgr-logo-horizontal.svg" alt="Tgr">
         <mat-card-content>
             <br>
           
-            <input type="text" matInput placeholder="Nombre" value="" >
-            <input type="text" matInput placeholder="apellido" value="" >
-            <input type="email" matInput placeholder="Email" value="" >
-            <input type="password" matInput placeholder="Password" value="" >
+            <!-- <div class="col mb-2">
+              <label for="name" class="form-label">Nombre:</label>
+              <input type="name" id="name" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control form-control-sm">
+            </div> -->
+            <!-- <div class="col mb-2">
+              <label for="familyName" class="form-label">Apellidos:</label>
+              <input type="familyName" id="familyName" familyName="familyName" #familyName="ngModel" [(ngModel)]="user.familyName" class="form-control form-control-sm">
+            </div> -->
+            <div class="col mb-2">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" id="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control form-control-sm">
+            </div>
+            <div class="row">
+              <div class="col mb-2">
+                <label for="password" class="form-label">Password:</label>
+                <div class="input-group input-group-sm">
+                  <input [type]="user.showPassword ? 'text' : 'password'" id="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control form-control-sm">
+                  <button type="button" class="btn btn-outline-secondary" (click)="user.showPassword = !user.showPassword">
+                    <span class="material-icons">{{ user.showPassword ? 'Ocultar Password' : 'Ver Password' }}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
 
 
 
         </mat-card-content>
         <mat-card-actions>
-            <button class="btn btn-primary"> Registrate</button>
+          <div class="row">
+            <div class="col d-grid">
+              <button type="button" (click)="signIn()" class="btn btn-sm btn-primary" [disabled]="loading">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
+                Registrate
+              </button>
+            </div>
+          </div>
         </mat-card-actions>
       </mat-card>
 </div>
