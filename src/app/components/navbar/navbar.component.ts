@@ -5,20 +5,17 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Router } from '@angular/router';
-import { CognitoService } from './services/cognito.service';
-import { UtilsService } from './services/utils.service';
 import { debounceTime } from 'rxjs';
-import { NavbarComponent } from './components/navbar/navbar.component';
-
-
+import { CognitoService } from '../../services/cognito.service';
+import { UtilsService } from '../../services/utils.service';
 @Component({
-  selector: 'app-root',
+  selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatIconModule, MatButtonModule, MatToolbarModule, RouterLink, NavbarComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  imports: [CommonModule, RouterOutlet, MatIconModule, MatButtonModule, MatToolbarModule, RouterLink],
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
-export class AppComponent implements OnInit {
+export class NavbarComponent {
   title = 'crudtgr';
   activo = false;
   emailtoken = ""
@@ -40,7 +37,5 @@ export class AppComponent implements OnInit {
     this.cognitoSrv.signOut();
     this.router.navigate(['/sing-in']);
   }
-
-  
 
 }

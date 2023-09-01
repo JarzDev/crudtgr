@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { IUser } from 'src/app/interfaces/iuser';
 import { CognitoService } from 'src/app/services/cognito.service';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, FormsModule, NavbarComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

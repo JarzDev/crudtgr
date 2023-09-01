@@ -8,11 +8,12 @@ import { IUser } from 'src/app/interfaces/iuser';
 import { Router } from '@angular/router';
 import { CognitoService } from 'src/app/services/cognito.service';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-sing-up',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, MatDividerModule, MatButtonModule, FormsModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatDividerModule, MatButtonModule, FormsModule, NavbarComponent],
   templateUrl: './sing-up.component.html',
   styleUrls: ['./sing-up.component.scss']
 })
