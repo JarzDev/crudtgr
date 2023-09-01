@@ -13,7 +13,8 @@ export class UtilsService {
 
   }
 
-  get emailtoken(): Observable<string> {
+   emailtoken(): Observable<string> {
+    
     return this._emailtoken.asObservable();
   }
 

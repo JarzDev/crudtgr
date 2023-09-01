@@ -1,37 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { CognitoService } from './services/cognito.service';
 import { UtilsService } from './services/utils.service';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatIconModule, MatButtonModule, MatToolbarModule,],
+  imports: [CommonModule, RouterOutlet, MatIconModule, MatButtonModule, MatToolbarModule, RouterLink],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   title = 'crudtgr';
   activo = false;
-  email = localStorage.getItem('email');
+  emailtoken = ""
 
   constructor(private router: Router, private cognitoSrv: CognitoService, private utilsSrv: UtilsService) { 
     
   }
 
   ngOnInit(): void {
-   
     
-
-    this.email = localStorage.getItem('email');
-    if(this.email != null){
-      this.activo = true;
-    }
+    this.utilsSrv.emailtoken().subscribe(_email => {
+      console.log('email', _email);
+      this.emailtoken = _email;
+    });
   }
 
   logOut() {

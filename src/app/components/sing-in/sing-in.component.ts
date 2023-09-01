@@ -8,6 +8,7 @@ import { IUser } from 'src/app/interfaces/iuser';
 import { Router } from '@angular/router';
 import { CognitoService } from 'src/app/services/cognito.service';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sing-in',
@@ -31,6 +32,7 @@ public signIn(): void {
   this.loading = true;
   this.cognitoService.signIn(this.user)
   .then(() => { 
+    Swal.fire("Bienvenido",  "success")
     this.router.navigate(['/show']);
     
   }).catch(() => {
