@@ -29,15 +29,37 @@ this.loading = false;
 this.user = {} as IUser;
 }
 
-public signIn(): void {
-  this.loading = true;
-  this.cognitoService.signIn(this.user)
-  .then(() => { 
-    Swal.fire("Bienvenido",  "success")
-    this.router.navigate(['/show']);
-    
-  }).catch(() => {
-    this.loading = false;
-  });
+public signIn() {
+  try {
+     
+    this.cognitoService.signIn(this.user)
+    .then((data) => {
+      this.loading = true;
+      Swal.fire({
+        icon: 'success',
+        title: 'Bienvenido',
+        text: 'Iniciando sesión',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.router.navigateByUrl('show');
+    }
+    ).catch((err) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.message,
+      });
+    }
+    );
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Usuario o contraseña incorrectos',
+      
+    });
+  }
+
 }
+
 }

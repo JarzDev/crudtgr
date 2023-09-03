@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { IUser } from 'src/app/interfaces/iuser';
 import { CognitoService } from 'src/app/services/cognito.service';
 import { FormsModule } from '@angular/forms';
@@ -13,9 +13,10 @@ import { NavbarComponent } from '../navbar/navbar.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-  constructor(private cognitoService: CognitoService) {
+  
+  constructor(private cognitoService: CognitoService, private router: Router) {
   
     this.cognitoService.isAuthenticated()
     .then(() => {
@@ -25,8 +26,12 @@ export class HomeComponent {
       this.cognitoService.signOut();
     }
     );
-    
+     }
 
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.router.navigateByUrl('sing-in');
+    }, 2000);
   }
 
 }

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { CognitoService } from 'src/app/services/cognito.service';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sing-up',
@@ -31,20 +32,53 @@ export class SingUpComponent {
   }
 
   public signUp(): void {
+   try{
+
+   
     this.loading = true;
     this.cognitoService.signUp(this.user)
     .then(() => {
       this.loading = false;
       this.isConfirm = true;
-    }).catch(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Bienvenido',
+        text: 'Espera tu codigo de confirmación',
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+    }).catch((err) => {
       this.loading = false;
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err,
+        });
     });
+
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'error',
+    });
+
   }
+}
 
   public confirmSignUp(): void {
+
     this.loading = true;
     this.cognitoService.confirmSignUp(this.user)
     .then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Bienvenido',
+        text: 'Usuario confirmado',
+        showConfirmButton: false,
+        timer: 1500
+      });
       this.router.navigate(['/signIn']);
     }).catch(() => {
       this.loading = false;
