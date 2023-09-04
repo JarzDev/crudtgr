@@ -6,6 +6,6 @@ export const environment = {
       },
 
       apiAws: {
-        api: 'https://0pol9tqq28.execute-api.us-east-1.amazonaws.com/'
+        api: 'https://0pol9tqq28.execute-api.us-east-1.amazonaws.com'
               },
 };

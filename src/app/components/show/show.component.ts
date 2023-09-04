@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { IUser } from 'src/app/interfaces/iuser';
@@ -6,12 +6,17 @@ import { CognitoService } from 'src/app/services/cognito.service';
 import { FormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import { NavbarUserComponent } from '../navbar-user/navbar-user.component';
+import { CrudService } from 'src/app/services/crud.service';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 export interface PeriodicElement {
   name: string;
   position: number;
   weight: string;
   symbol: string;
+  
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -26,23 +31,25 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-show',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, MatTableModule, NavbarUserComponent],
+  imports: [CommonModule, RouterModule, FormsModule, MatTableModule, NavbarUserComponent, HttpClientModule],
   templateUrl: './show.component.html',
   styleUrls: ['./show.component.scss']
 
   
 })
-export class ShowComponent {
+export class ShowComponent implements OnInit {
+
+  personas : any;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
 
   cognitoData : any ;
-  constructor(private cognitoService: CognitoService) {
+  constructor(private cognitoService: CognitoService, private crudSrv: CrudService, private http: HttpClient) {
   
 
       this.cognitoData  = this.cognitoService.getUser().then((data) => {
         this.cognitoData = data;
-        console.log(this.cognitoData.attributes.email);
+        console.log(this.cognitoData);
 
         localStorage.setItem('email', this.cognitoData.attributes.email);
 
@@ -53,6 +60,19 @@ export class ShowComponent {
 
       ;
   }
-  
+
+  ngOnInit(): void {
+    
+
+  ;
+
+}
+
+reads() {
+  this.crudSrv.reads().subscribe(_personas => {
+    console.log('personas', _personas);
+    this.personas = _personas;
+  });
+}
 
 }
